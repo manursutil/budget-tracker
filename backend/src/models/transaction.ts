@@ -1,25 +1,40 @@
 import mongoose from 'mongoose';
 
-const transactionSchema = new mongoose.Schema({
-  amount: {
-    type: Number,
-    required: true,
+const transactionSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    type: {
+      type: String,
+      enum: ['income', 'expense'],
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    note: {
+      type: String,
+      required: false,
+    },
   },
-  category: {
-    type: String,
-    required: true,
+  {
+    timestamps: true,
   },
-  date: String,
-  title: {
-    type: String,
-    required: true,
-  },
-  user: {
-    ref: 'User',
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
-});
+);
 
 transactionSchema.set('toJSON', {
   transform: (_document, returnedObject: any) => {
