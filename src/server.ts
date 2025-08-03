@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 
 import config from '@/config';
 import logger from '@/middleware/logger';
+import requestLogger from '@/middleware/requestLogger';
+import errorHandler from '@/middleware/errorHandler';
+import unknownEndpoint from '@/middleware/unknownEndpoint';
 
 const app = express();
 
@@ -19,12 +22,17 @@ mongoose
   .catch((error) => logger.error('error connecting to MongoDB', error.message));
 
 app.use(cors());
+app.use(express.json());
+app.use(requestLogger);
 
 app.get('/', (_req, res) => {
   res.json({
     message: 'hello world',
   });
 });
+
+app.use(unknownEndpoint);
+app.use(errorHandler);
 
 app.listen(config.PORT, () => {
   console.log(`Server running on: http://localhost:${config.PORT}`);
