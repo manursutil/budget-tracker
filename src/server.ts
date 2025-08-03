@@ -7,6 +7,10 @@ import logger from '@/middleware/logger';
 import requestLogger from '@/middleware/requestLogger';
 import errorHandler from '@/middleware/errorHandler';
 import unknownEndpoint from '@/middleware/unknownEndpoint';
+import getTokenFrom from '@/middleware/getTokenFrom';
+
+import loginRouter from '@/routes/loginRouter';
+import userRouter from '@/routes/userRouter';
 
 const app = express();
 
@@ -24,12 +28,16 @@ mongoose
 app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
+app.use(getTokenFrom);
 
 app.get('/', (_req, res) => {
   res.json({
     message: 'hello world',
   });
 });
+
+app.use('/api/users', userRouter);
+app.use('/api/login', loginRouter);
 
 app.use(unknownEndpoint);
 app.use(errorHandler);

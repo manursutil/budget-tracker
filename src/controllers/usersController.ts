@@ -50,4 +50,4 @@ const createNewUser = async (req: Request, res: Response) => {
   }
 };
 
-export default { getAllUsers, createNewUser };
+export { getAllUsers, createNewUser };
