@@ -12,6 +12,9 @@ import getTokenFrom from '@/middleware/getTokenFrom';
 import loginRouter from '@/routes/loginRouter';
 import userRouter from '@/routes/userRouter';
 
+import '@/models/user';
+import '@/models/transaction';
+
 const app = express();
 
 if (!config.MONGODB_URI || !config.PORT) {

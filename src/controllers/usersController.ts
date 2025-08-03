@@ -7,6 +7,7 @@ const getAllUsers = async (_req: Request, res: Response) => {
     const users = await User.find({}).populate('transactions');
     res.status(200).json(users);
   } catch (error) {
+    console.error('Error in getAllUsers:', error);
     res.status(500).json({ error: 'Failed to fetch all users' });
   }
 };

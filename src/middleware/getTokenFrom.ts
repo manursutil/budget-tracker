@@ -1,11 +1,21 @@
-import { Request } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-const getTokenFrom = (req: Request): string | null => {
+declare global {
+  namespace Express {
+    interface Request {
+      token?: string | null;
+    }
+  }
+}
+
+const getTokenFrom = (req: Request, _res: Response, next: NextFunction) => {
   const authorization = req.get('authorization');
   if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '');
+    req.token = authorization.replace('Bearer ', '');
+  } else {
+    req.token = null;
   }
-  return null;
+  next();
 };
 
 export default getTokenFrom;
