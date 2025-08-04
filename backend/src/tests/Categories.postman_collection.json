@@ -1,0 +1,586 @@
+{
+	"info": {
+		"_postman_id": "b985d083-263e-42dd-b914-c5ccbf5efa1c",
+		"name": "Categories",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46132907"
+	},
+	"item": [
+		{
+			"name": "Get all categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzMjUwNDYsImV4cCI6MTc1NDMyODY0Nn0.jipRjrKBIHUzFA2XqBRb7vXWeeVWo2s4ZGb6MlT9Z9Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/categories",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 16:31:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				},
+				{
+					"name": "Response 2",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "237"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ed-2WpDt8E9aZLoRU7+ZdYLmuj41FA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 16:33:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"userId\": \"688f994fe57046a8bd30dccc\",\n        \"name\": \"Groceries\",\n        \"type\": \"expense\",\n        \"color\": \"#FFAA00\",\n        \"isActive\": true,\n        \"isDefault\": false,\n        \"createdAt\": \"2025-08-04T16:33:01.687Z\",\n        \"updatedAt\": \"2025-08-04T16:33:01.687Z\",\n        \"id\": \"6890e0bd18f8f20dd4ea27dc\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create new category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzMjUwNDYsImV4cCI6MTc1NDMyODY0Nn0.jipRjrKBIHUzFA2XqBRb7vXWeeVWo2s4ZGb6MlT9Z9Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Other\",\n  \"type\": \"income\",\n  \"color\": \"#FFAA00\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/categories",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Groceries\",\n  \"type\": \"expense\",\n  \"color\": \"#FFAA00\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "235"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"eb-yAqNEY4PnmofV6mCeAR1RuzfrLE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 16:33:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userId\": \"688f994fe57046a8bd30dccc\",\n    \"name\": \"Groceries\",\n    \"type\": \"expense\",\n    \"color\": \"#FFAA00\",\n    \"isActive\": true,\n    \"isDefault\": false,\n    \"createdAt\": \"2025-08-04T16:33:01.687Z\",\n    \"updatedAt\": \"2025-08-04T16:33:01.687Z\",\n    \"id\": \"6890e0bd18f8f20dd4ea27dc\"\n}"
+				},
+				{
+					"name": "Response 2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rent\",\n  \"type\": \"expense\",\n  \"color\": \"#FFAA00\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "230"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e6-WwZpd0nX16k+mDGEQlKpf2m68z0\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 16:36:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userId\": \"688f994fe57046a8bd30dccc\",\n    \"name\": \"Rent\",\n    \"type\": \"expense\",\n    \"color\": \"#FFAA00\",\n    \"isActive\": true,\n    \"isDefault\": false,\n    \"createdAt\": \"2025-08-04T16:36:34.229Z\",\n    \"updatedAt\": \"2025-08-04T16:36:34.229Z\",\n    \"id\": \"6890e19218f8f20dd4ea27e2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzMjUwNDYsImV4cCI6MTc1NDMyODY0Nn0.jipRjrKBIHUzFA2XqBRb7vXWeeVWo2s4ZGb6MlT9Z9Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Updated Name\",\n  \"color\": \"#00FFAA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/categories/6890e0bd18f8f20dd4ea27dc",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"6890e0bd18f8f20dd4ea27dc"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Name\",\n  \"color\": \"#00FFAA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/6890e0bd18f8f20dd4ea27dc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"6890e0bd18f8f20dd4ea27dc"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "238"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ee-UFvF6TAG0lYpCGFqojZ2Pxm1Zyg\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 16:34:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userId\": \"688f994fe57046a8bd30dccc\",\n    \"name\": \"Updated Name\",\n    \"type\": \"expense\",\n    \"color\": \"#00FFAA\",\n    \"isActive\": true,\n    \"isDefault\": false,\n    \"createdAt\": \"2025-08-04T16:33:01.687Z\",\n    \"updatedAt\": \"2025-08-04T16:34:59.111Z\",\n    \"id\": \"6890e0bd18f8f20dd4ea27dc\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get category by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzMjUwNDYsImV4cCI6MTc1NDMyODY0Nn0.jipRjrKBIHUzFA2XqBRb7vXWeeVWo2s4ZGb6MlT9Z9Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/categories/6890e0bd18f8f20dd4ea27dc",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"6890e0bd18f8f20dd4ea27dc"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/6890e0bd18f8f20dd4ea27dc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"6890e0bd18f8f20dd4ea27dc"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "238"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ee-UFvF6TAG0lYpCGFqojZ2Pxm1Zyg\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 16:35:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userId\": \"688f994fe57046a8bd30dccc\",\n    \"name\": \"Updated Name\",\n    \"type\": \"expense\",\n    \"color\": \"#00FFAA\",\n    \"isActive\": true,\n    \"isDefault\": false,\n    \"createdAt\": \"2025-08-04T16:33:01.687Z\",\n    \"updatedAt\": \"2025-08-04T16:34:59.111Z\",\n    \"id\": \"6890e0bd18f8f20dd4ea27dc\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzMjUwNDYsImV4cCI6MTc1NDMyODY0Nn0.jipRjrKBIHUzFA2XqBRb7vXWeeVWo2s4ZGb6MlT9Z9Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/categories/6890e1d718f8f20dd4ea27e6",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"6890e1d718f8f20dd4ea27e6"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/6890e1d718f8f20dd4ea27e6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"6890e1d718f8f20dd4ea27e6"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 16:38:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
