@@ -1,18 +1,31 @@
-# Backend Testing
+# Backend – Budget Tracker API
 
-This project includes comprehensive tests for user creation and login functionality.
+This is the backend for the Budget Tracker app, built with Node.js, Express, TypeScript, and MongoDB.
+
+---
+
+## Tech Stack
+
+- **Node.js** + **Express**
+- **MongoDB** + **Mongoose**
+- **TypeScript**
+- **JWT Authentication**
+- **Testing**: Jest + Supertest + MongoDB Memory Server
+
+## Backend Testing
 
 ### Test Structure
 
 - **Unit Tests**: Test individual functions and components
 - **Integration Tests**: Test the complete flow from user registration to login
-- **API Tests**: Test HTTP endpoints using Supertest
+- **API Tests**: Test HTTP endpoints using Supertest (auth + category)
 
 ### Test Files
 
-- `src/tests/controllers.test.ts` - Unit tests for user creation and login controllers
-- `src/tests/simple-integration.test.ts` - Integration tests for complete authentication flow
-- `src/tests/setup.ts` - Test environment setup
+- `src/tests/controllers.test.ts` – Unit tests for user creation and login controllers
+- `src/tests/simple-integration.test.ts` – Integration tests for complete authentication flow
+- `src/tests/categoryControllers.test.ts` – Integration and API tests for category endpoints
+- `src/tests/setup.ts` – Test environment setup
 
 ### Running Tests
 
@@ -51,6 +64,19 @@ The tests cover:
 - ✅ Invalid username/password handling
 - ✅ Case-sensitive username matching
 
+#### Category Controller
+
+- ✅ GET /categories: fetch all active categories for logged-in user
+- ✅ POST /categories: create category with valid data
+- ✅ Prevent duplicate category names for same user
+- ✅ Allow same name across different users
+- ✅ Return 400 for validation and ObjectId errors
+- ✅ GET /categories/:id: fetch single category
+- ✅ PATCH /categories/:id: update category fields (with field whitelist)
+- ✅ Prevent updates to protected fields (userId, createdAt)
+- ✅ DELETE /categories/:id: delete category with ownership check
+- ✅ Proper handling of unauthorized access or non-existent resources
+
 #### Integration Tests
 
 - ✅ Complete registration to login flow
@@ -82,49 +108,62 @@ npm run dev
 
 ## API Endpoints
 
-### POST /api/users
+#### Auth Endpoints:
 
-Create a new user account.
+- POST /api/auth/login
+- POST /api/users/register
+- GET /api/users/
+- GET /api/users/me
 
-**Request Body:**
+#### Category Endpoints:
 
-```json
-{
-  "username": "string",
-  "name": "string",
-  "password": "string"
-}
+- GET /api/categories
+- POST /api/categories
+- GET /api/categories/:id
+- DELETE /api/categories/:id
+- PATCH /api/categories/:id
+
+#### Transaction Endpoints:
+
+- IN PROGRESS
+
+#### Budget Endpoints:
+
+- IN PROGRESS
+
+#### Reports Endpoints:
+
+- IN PROGRESS
+
+## Authorization
+
+Use JWT in the Authorization header for all protected routes:
+
+```bash
+Authorization: Bearer <token>
 ```
 
-**Response:**
+## Folder Structure
 
-```json
-{
-  "id": "string",
-  "username": "string",
-  "name": "string"
-}
-```
-
-### POST /api/login
-
-Authenticate a user and receive a JWT token.
-
-**Request Body:**
-
-```json
-{
-  "username": "string",
-  "password": "string"
-}
-```
-
-**Response:**
-
-```json
-{
-  "token": "string",
-  "username": "string",
-  "name": "string"
-}
+```bash
+backend/
+├── src/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── types/
+│   ├── tests/
+│   ├── config/
+│   ├── middleware/
+│   └── server.ts
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── nodemon.json
+├── jest.config.js
+├── .prettierrc
+├── .prettierignore
+├── README.md
+└── tsconfig.json
 ```
