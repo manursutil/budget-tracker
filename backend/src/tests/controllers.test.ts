@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createNewUser } from '@/controllers/usersController';
+import { createNewUser, getCurrentUser } from '@/controllers/usersController';
 import loginUser from '@/controllers/loginController';
 import User from '@/models/user';
 import bcrypt from 'bcrypt';
@@ -34,7 +34,7 @@ describe('User Controller Tests', () => {
         expect.objectContaining({
           username: 'testuser',
           name: 'Test User',
-        })
+        }),
       );
 
       // Verify user was saved to database
@@ -127,7 +127,9 @@ describe('User Controller Tests', () => {
       const savedUser = await User.findOne({ username: 'hashuser' });
       expect(savedUser?.passwordHash).toBeDefined();
       expect(savedUser?.passwordHash).not.toBe('password123');
-      expect(savedUser?.passwordHash).toMatch(/^\$2[aby]\$\d{1,2}\$[./A-Za-z0-9]{53}$/);
+      expect(savedUser?.passwordHash).toMatch(
+        /^\$2[aby]\$\d{1,2}\$[./A-Za-z0-9]{53}$/,
+      );
     });
   });
 
@@ -161,12 +163,15 @@ describe('User Controller Tests', () => {
           token: expect.any(String),
           username: 'testuser',
           name: 'Test User',
-        })
+        }),
       );
 
       // Verify token is valid
       const responseBody = (res.json as jest.Mock).mock.calls[0][0];
-      const decoded = jwt.verify(responseBody.token, config.SECRET as string) as any;
+      const decoded = jwt.verify(
+        responseBody.token,
+        config.SECRET as string,
+      ) as any;
       expect(decoded.username).toBe('testuser');
     });
 
@@ -236,7 +241,10 @@ describe('User Controller Tests', () => {
       await loginUser(req, res);
 
       const responseBody = (res.json as jest.Mock).mock.calls[0][0];
-      const decoded = jwt.verify(responseBody.token, config.SECRET as string) as any;
+      const decoded = jwt.verify(
+        responseBody.token,
+        config.SECRET as string,
+      ) as any;
 
       expect(decoded).toHaveProperty('username', 'testuser');
       expect(decoded).toHaveProperty('id');
@@ -244,4 +252,66 @@ describe('User Controller Tests', () => {
       expect(decoded).toHaveProperty('exp');
     });
   });
-}); 
+
+  describe('getCurrentUser', () => {
+    it('should return current user profile when authenticated', async () => {
+      // Create a test user for this test
+      const passwordHash = await bcrypt.hash('password123', 10);
+      const testUser = new User({
+        username: 'testuser',
+        name: 'Test User',
+        passwordHash,
+      });
+      await testUser.save();
+
+      const req = {
+        user: testUser.id,
+      } as Request & { user?: string };
+
+      const res = createMockResponse();
+
+      await getCurrentUser(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(
+        expect.objectContaining({
+          username: 'testuser',
+          name: 'Test User',
+        }),
+      );
+
+      // Verify password hash is not included in response
+      const responseBody = (res.json as jest.Mock).mock.calls[0][0];
+      expect(responseBody.passwordHash).toBeUndefined();
+      expect(responseBody).toHaveProperty('username');
+      expect(responseBody).toHaveProperty('name');
+    });
+
+    it('should return 401 when user is not authenticated', async () => {
+      const req = {} as Request & { user?: string };
+      const res = createMockResponse();
+
+      await getCurrentUser(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(401);
+      expect(res.json).toHaveBeenCalledWith({
+        error: 'Authentication required',
+      });
+    });
+
+    it('should return 404 when user does not exist', async () => {
+      const req = {
+        user: '507f1f77bcf86cd799439011', // Non-existent ID
+      } as Request & { user?: string };
+
+      const res = createMockResponse();
+
+      await getCurrentUser(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({
+        error: 'User not found',
+      });
+    });
+  });
+});

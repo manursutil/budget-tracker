@@ -1,282 +1,318 @@
 {
-	"info": {
-		"_postman_id": "d610a083-e4a3-4504-91d1-2f28f2a56e72",
-		"name": "Auth",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "46132907"
-	},
-	"item": [
-		{
-			"name": "Create new user ",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"password\": \"secret123\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/api/users",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"api",
-						"users"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Response",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"password\": \"secret123\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": null,
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "99"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"63-9vnH8YTqijWnxs0gcGu4q65eGMQ\""
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 03 Aug 2025 17:15:59 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"transactions\": [],\n    \"_id\": \"688f994fe57046a8bd30dccc\",\n    \"__v\": 0\n}"
-				}
-			]
-		},
-		{
-			"name": "Get all users",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"password\": \"secret123\"\n}"
-				},
-				"url": {
-					"raw": "{{baseUrl}}/api/users",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"api",
-						"users"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Response",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"password\": \"secret123\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "377"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"179-ylCnTpEec6vFYCI/eZO2+RruXb0\""
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 03 Aug 2025 17:25:46 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "[\n    {\n        \"username\": \"testUser\",\n        \"name\": \"postman\",\n        \"transactions\": [],\n        \"id\": \"688f994fe57046a8bd30dccc\"\n    },\n    {\n        \"username\": \"testuser\",\n        \"name\": \"Test User\",\n        \"transactions\": [],\n        \"id\": \"688f99d0644720eb7df495c9\"\n    },\n    {\n        \"username\": \"testuser2\",\n        \"name\": \"Test User 2\",\n        \"transactions\": [],\n        \"id\": \"688f9a4fe1532530803de8db\"\n    },\n    {\n        \"username\": \"testuser3\",\n        \"name\": \"Test User 3\",\n        \"transactions\": [],\n        \"id\": \"688f9a8f7222f6dd8db079b4\"\n    }\n]"
-				}
-			]
-		},
-		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"testUser\",\n    \"password\": \"secret123\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/api/login",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Response",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"testUser\",\n    \"password\": \"secret123\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "251"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"fb-mlUl1vwCwAr0iRWchUH5r3rz87o\""
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 03 Aug 2025 17:26:55 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQyNDIwMTUsImV4cCI6MTc1NDI0NTYxNX0.8k4n5dPNF-Ka-mcxLJ3mlaIIYDxeAUwl6MrJW2jFPiU\",\n    \"username\": \"testUser\",\n    \"name\": \"postman\"\n}"
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "d610a083-e4a3-4504-91d1-2f28f2a56e72",
+    "name": "Auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46132907"
+  },
+  "item": [
+    {
+      "name": "Register new user",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"password\": \"secret123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users/register",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "register"]
+        }
+      },
+      "response": [
+        {
+          "name": "Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"password\": \"secret123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "register"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "99"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"63-9vnH8YTqijWnxs0gcGu4q65eGMQ\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 03 Aug 2025 17:15:59 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"transactions\": [],\n    \"_id\": \"688f994fe57046a8bd30dccc\",\n    \"__v\": 0\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get all users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        }
+      },
+      "response": [
+        {
+          "name": "Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "99"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"63-9vnH8YTqijWnxs0gcGu4q65eGMQ\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 03 Aug 2025 17:15:59 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"username\": \"testUser\",\n        \"name\": \"postman\",\n        \"transactions\": [],\n        \"id\": \"688f994fe57046a8bd30dccc\"\n    },\n    {\n        \"username\": \"testuser\",\n        \"name\": \"Test User\",\n        \"transactions\": [],\n        \"id\": \"688f99d0644720eb7df495c9\"\n    },\n    {\n        \"username\": \"testuser2\",\n        \"name\": \"Test User 2\",\n        \"transactions\": [],\n        \"id\": \"688f9a4fe1532530803de8db\"\n    },\n    {\n        \"username\": \"testuser3\",\n        \"name\": \"Test User 3\",\n        \"transactions\": [],\n        \"id\": \"688f9a8f7222f6dd8db079b4\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"testUser\",\n    \"password\": \"secret123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "login"]
+        }
+      },
+      "response": [
+        {
+          "name": "Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testUser\",\n    \"password\": \"secret123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "251"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"fb-mlUl1vwCwAr0iRWchUH5r3rz87o\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 03 Aug 2025 17:26:55 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQyNDIwMTUsImV4cCI6MTc1NDI0NTYxNX0.8k4n5dPNF-Ka-mcxLJ3mlaIIYDxeAUwl6MrJW2jFPiU\",\n    \"username\": \"testUser\",\n    \"name\": \"postman\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get current user profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/me",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "me"]
+        }
+      },
+      "response": [
+        {
+          "name": "Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "me"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "99"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"63-9vnH8YTqijWnxs0gcGu4q65eGMQ\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 03 Aug 2025 17:15:59 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"username\": \"testUser\",\n    \"name\": \"postman\",\n    \"transactions\": [],\n    \"_id\": \"688f994fe57046a8bd30dccc\",\n    \"__v\": 0\n}"
+        }
+      ]
+    }
+  ]
 }

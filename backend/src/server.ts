@@ -9,7 +9,7 @@ import errorHandler from '@/middleware/errorHandler';
 import unknownEndpoint from '@/middleware/unknownEndpoint';
 import getTokenFrom from '@/middleware/getTokenFrom';
 
-import loginRouter from '@/routes/loginRouter';
+import authRouter from '@/routes/authRouter';
 import userRouter from '@/routes/userRouter';
 
 import '@/models/user';
@@ -43,8 +43,8 @@ app.get('/', (_req, res) => {
   });
 });
 
+app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
-app.use('/api/login', loginRouter);
 
 app.use(unknownEndpoint);
 app.use(errorHandler);

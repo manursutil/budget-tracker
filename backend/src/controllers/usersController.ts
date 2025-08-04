@@ -51,4 +51,25 @@ const createNewUser = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllUsers, createNewUser };
+const getCurrentUser = async (
+  req: Request & { user?: string },
+  res: Response,
+) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    const user = await User.findById(req.user).select('-passwordHash');
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error in getCurrentUser:', error);
+    res.status(500).json({ error: 'Failed to fetch user profile' });
+  }
+};
+
+export { getAllUsers, createNewUser, getCurrentUser };
