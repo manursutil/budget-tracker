@@ -44,7 +44,6 @@ const createNewUser = async (req: Request, res: Response) => {
 
     const savedUser = await user.save();
     const { passwordHash: _, ...userWithoutPassword } = savedUser.toObject();
-
     res.status(201).json(userWithoutPassword);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create new user' });
@@ -52,7 +51,7 @@ const createNewUser = async (req: Request, res: Response) => {
 };
 
 const getCurrentUser = async (
-  req: Request & { user?: string },
+  req: Request & { user?: { id: string } }, // Updated type
   res: Response,
 ) => {
   try {
@@ -60,7 +59,8 @@ const getCurrentUser = async (
       return res.status(401).json({ error: 'Authentication required' });
     }
 
-    const user = await User.findById(req.user).select('-passwordHash');
+    const user = await User.findById(req.user.id).select('-passwordHash');
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }

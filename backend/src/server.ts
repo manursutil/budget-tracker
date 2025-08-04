@@ -11,6 +11,7 @@ import getTokenFrom from '@/middleware/getTokenFrom';
 
 import authRouter from '@/routes/authRouter';
 import userRouter from '@/routes/userRouter';
+import categoryRouter from '@/routes/categoryRouter';
 
 import '@/models/user';
 import '@/models/transaction';
@@ -45,6 +46,7 @@ app.get('/', (_req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
+app.use('/api/categories', categoryRouter);
 
 app.use(unknownEndpoint);
 app.use(errorHandler);

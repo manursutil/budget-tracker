@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ITransaction } from '@/types/Transaction';
 
 const transactionSchema = new mongoose.Schema(
   {
@@ -6,6 +7,7 @@ const transactionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+      index: true,
     },
     type: {
       type: String,
@@ -15,19 +17,23 @@ const transactionSchema = new mongoose.Schema(
     amount: {
       type: Number,
       required: true,
-      min: 0,
+      min: 0.01,
     },
     category: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category',
       required: true,
     },
     date: {
       type: Date,
       required: true,
       default: Date.now,
+      index: true,
     },
-    note: {
+    description: {
       type: String,
+      maxlength: 500,
+      trim: true,
       required: false,
     },
   },
@@ -35,6 +41,9 @@ const transactionSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+transactionSchema.index({ userId: 1, date: -1 });
+transactionSchema.index({ userId: 1, category: 1 });
 
 transactionSchema.set('toJSON', {
   transform: (_document, returnedObject: any) => {
@@ -44,4 +53,4 @@ transactionSchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('Transaction', transactionSchema);
+export default mongoose.model<ITransaction>('Transaction', transactionSchema);
