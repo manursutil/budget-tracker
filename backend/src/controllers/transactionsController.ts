@@ -1,18 +1,46 @@
 import Transaction from '@/models/transaction';
-import Category from '@/models/category';
 import { CustomRequest } from '@/types/CustomRequest';
 import { Response } from 'express';
 import mongoose from 'mongoose';
+import {
+  validateCategoryExists,
+  validateTransactionInput,
+} from '@/utils/validationHelpers';
+import {
+  createTransactionSchema,
+  getAllTransactionsSchema,
+  updateTransactionSchema,
+} from '@/schemas/transactionSchemas';
+import { sendError, sendSuccess } from '@/utils/responseHelpers';
+import { z, ZodError } from 'zod';
 
 export const getAllTransactions = async (req: CustomRequest, res: Response) => {
   try {
-    const { type } = req.query;
+    const validation = validateTransactionInput(
+      req.query,
+      getAllTransactionsSchema,
+    );
+
+    if (!validation.success) {
+      const errorMessage =
+        validation.message instanceof ZodError
+          ? (validation.message as ZodError).issues
+              .map((e) => e.message)
+              .join(', ')
+          : validation.message;
+
+      return sendError(res, errorMessage || 'Validation failed', 400);
+    }
+
+    const { type } = validation.data as z.infer<
+      typeof getAllTransactionsSchema
+    >;
 
     const filter: Record<string, any> = {
       userId: req.user.id,
     };
 
-    if (type && ['income', 'expense'].includes(type as string)) {
+    if (type) {
       filter.type = type;
     }
 
@@ -21,52 +49,36 @@ export const getAllTransactions = async (req: CustomRequest, res: Response) => {
       createdAt: -1,
     });
 
-    res.json(transactions);
+    sendSuccess(res, transactions);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch all transactions' });
+    sendError(res, 'Failed to fetch all transactions');
   }
 };
 
 export const createTransaction = async (req: CustomRequest, res: Response) => {
   try {
-    const { type, amount, category, date, description } = req.body;
+    const validation = validateTransactionInput(
+      req.body,
+      createTransactionSchema,
+    );
 
-    if (!type || !amount || !category) {
-      return res
-        .status(400)
-        .json({ message: 'Type, amount and category are required' });
+    if (!validation.success) {
+      const errorMessage =
+        validation.message instanceof ZodError
+          ? (validation.message as ZodError).issues
+              .map((e) => e.message)
+              .join(', ')
+          : validation.message;
+
+      return sendError(res, errorMessage || 'Validation failed', 400);
     }
 
-    if (!mongoose.Types.ObjectId.isValid(category)) {
-      return res.status(400).json({ message: 'Invalid category ID' });
-    }
+    const { type, amount, category, date, description } =
+      validation.data as z.infer<typeof createTransactionSchema>;
 
-    const categoryExists = await Category.findOne({
-      _id: category,
-      userId: req.user.id,
-      isActive: true,
-    });
-
-    if (!categoryExists) {
-      return res
-        .status(400)
-        .json({ message: 'Category not found or inactive' });
-    }
-
-    if (typeof amount !== 'number' || amount <= 0) {
-      return res
-        .status(400)
-        .json({ message: 'Amount must be a positive number' });
-    }
-
-    if (!['income', 'expense'].includes(type)) {
-      return res
-        .status(400)
-        .json({ message: 'Type must be either income or expense' });
-    }
-
-    if (description && description.trim().length > 500) {
-      return res.status(400).json({ message: 'Description is too long' });
+    const exists = await validateCategoryExists(category, req.user.id);
+    if (!exists) {
+      return sendError(res, 'Category not found or inactive', 400);
     }
 
     const transaction = new Transaction({
@@ -83,12 +95,10 @@ export const createTransaction = async (req: CustomRequest, res: Response) => {
     const populatedTransaction = await Transaction.findById(
       transaction._id,
     ).populate('category', 'name type color');
-    res.status(201).json(populatedTransaction);
+
+    sendSuccess(res, populatedTransaction, 201);
   } catch (error: any) {
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({ message: 'Invalid transaction data' });
-    }
-    res.status(500).json({ message: 'Failed to create new transaction' });
+    sendError(res, 'Failed to create new transaction');
   }
 };
 
@@ -99,7 +109,7 @@ export const getSingleTransaction = async (
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: 'Invalid transaction ID' });
+    return sendError(res, 'Invalid transaction ID', 400);
   }
 
   try {
@@ -109,12 +119,12 @@ export const getSingleTransaction = async (
     }).populate('category', 'name type color');
 
     if (!transaction) {
-      return res.status(404).json({ message: 'Transaction not found' });
+      return sendError(res, 'Transaction not found', 404);
     }
 
-    res.json(transaction);
+    sendSuccess(res, transaction);
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to fetch transaction' });
+    sendError(res, 'Failed to fetch transaction');
   }
 };
 
@@ -125,7 +135,7 @@ export const deleteTransaction = async (
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: 'Invalid transaction ID' });
+    return sendError(res, 'Invalid transaction ID', 400);
   }
 
   try {
@@ -135,14 +145,12 @@ export const deleteTransaction = async (
     });
 
     if (!transaction) {
-      return res
-        .status(404)
-        .json({ message: 'Transaction not found or not authorized' });
+      return sendError(res, 'Transaction not found or not authorized');
     }
 
-    return res.status(204).end();
+    res.status(204).end();
   } catch (error) {
-    res.status(500).json({ message: 'Failed to delete transaction' });
+    sendError(res, 'Failed to delete transaction');
   }
 };
 
@@ -153,7 +161,21 @@ export const updateTransaction = async (
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: 'Invalid transaction ID' });
+    return sendError(res, 'Invalid transaction ID', 400);
+  }
+
+  const validation = validateTransactionInput(
+    req.body,
+    updateTransactionSchema,
+  );
+
+  if (!validation.success) {
+    const errorMessage =
+      validation.message instanceof ZodError
+        ? validation.message.issues.map((e) => e.message).join(', ')
+        : validation.message;
+
+    return sendError(res, errorMessage || 'Validation failed', 400);
   }
 
   try {
@@ -163,73 +185,31 @@ export const updateTransaction = async (
     });
 
     if (!transaction) {
-      return res.status(404).json({ message: 'Transaction not found' });
+      return sendError(res, 'Transaction not found', 404);
     }
 
-    const allowFields = ['type', 'amount', 'category', 'date', 'description'];
+    const { type, amount, category, date, description } =
+      validation.data as z.infer<typeof updateTransactionSchema>;
 
-    for (const key of allowFields) {
-      const value = req.body[key];
-
-      if (value !== undefined) {
-        if (key === 'amount') {
-          if (typeof value !== 'number' || value <= 0) {
-            return res
-              .status(400)
-              .json({ message: 'Amount must be a positive number' });
-          }
-
-          transaction.amount = Math.round(value * 100) / 100;
-        } else if (key === 'type') {
-          if (!['income', 'expense'].includes(value)) {
-            return res
-              .status(400)
-              .json({ message: 'Type must be income or expense' });
-          }
-
-          transaction.type = value;
-        } else if (key === 'category') {
-          if (!mongoose.Types.ObjectId.isValid(value)) {
-            return res.status(400).json({ message: 'Invalid category ID' });
-          }
-
-          const categoryExists = await Category.findOne({
-            _id: value,
-            userId: req.user.id,
-            isActive: true,
-          });
-
-          if (!categoryExists) {
-            return res
-              .status(400)
-              .json({ message: 'Category not found or inactive' });
-          }
-
-          transaction.category = value;
-        } else if (key === 'date') {
-          if (isNaN(Date.parse(value))) {
-            return res.status(400).json({ message: 'Invalid date format' });
-          }
-
-          transaction.date = new Date(value);
-        } else if (key === 'description') {
-          if (typeof value !== 'string' || value.trim().length > 500) {
-            return res.status(400).json({ message: 'Description is too long' });
-          }
-
-          transaction.description = value.trim();
-        }
-      }
+    if (type) transaction.type = type;
+    if (amount) transaction.amount = Math.round(amount * 100) / 100;
+    if (category) {
+      const exists = await validateCategoryExists(category, req.user.id);
+      if (!exists) return sendError(res, 'Category not found or inactive', 400);
+      transaction.category = new mongoose.Types.ObjectId(category);
     }
+    if (date) transaction.date = new Date(date);
+    if (description !== undefined) transaction.description = description.trim();
 
     await transaction.save();
+
     const populated = await Transaction.findById(transaction._id).populate(
       'category',
       'name type color',
     );
 
-    return res.json(populated);
-  } catch (error: any) {
-    res.status(500).json({ message: 'Failed to update category' });
+    sendSuccess(res, populated);
+  } catch (error) {
+    sendError(res, 'Failed to update transaction');
   }
 };

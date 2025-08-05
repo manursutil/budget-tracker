@@ -1,0 +1,476 @@
+{
+	"info": {
+		"_postman_id": "9a376848-6447-4b04-aedf-497b1155303c",
+		"name": "Transactions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46132907"
+	},
+	"item": [
+		{
+			"name": "Create new transaction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzODgwNDYsImV4cCI6MTc1NDM5MTY0Nn0.RzlMKf1q5fMObk6hXlDleAo-55k9Ee9jA_aD803T4KQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"expense\",\n  \"amount\": 50.3,\n  \"category\": \"6890e0bd18f8f20dd4ea27dc\",\n  \"date\": \"2025-08-01\",\n  \"description\": \"More groceries\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/transactions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"transactions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"expense\",\n  \"amount\": 120.5,\n  \"category\": \"6891d679f7aa92427d7a2d93\",\n  \"date\": \"2025-08-01\",\n  \"description\": \"Groceries at the market\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "371"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"173-lOn/v1ve+k5yUKWxsXxvr2X82yM\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Aug 2025 10:01:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"userId\": \"688f994fe57046a8bd30dccc\",\n        \"type\": \"expense\",\n        \"amount\": 120.5,\n        \"category\": {\n            \"name\": \"Other\",\n            \"type\": \"income\",\n            \"color\": \"#FFAA00\",\n            \"id\": \"6891d679f7aa92427d7a2d93\"\n        },\n        \"date\": \"2025-08-01T00:00:00.000Z\",\n        \"description\": \"Groceries at the market\",\n        \"createdAt\": \"2025-08-05T10:01:58.192Z\",\n        \"updatedAt\": \"2025-08-05T10:01:58.192Z\",\n        \"id\": \"6891d696f7aa92427d7a2d96\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all transactions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzODgwNDYsImV4cCI6MTc1NDM5MTY0Nn0.RzlMKf1q5fMObk6hXlDleAo-55k9Ee9jA_aD803T4KQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"expense\",\n  \"amount\": 120.5,\n  \"category\": \"6891d679f7aa92427d7a2d93\",\n  \"date\": \"2025-08-01\",\n  \"description\": \"Groceries at the market\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/transactions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"transactions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"expense\",\n  \"amount\": 120.5,\n  \"category\": \"6891d679f7aa92427d7a2d93\",\n  \"date\": \"2025-08-01\",\n  \"description\": \"Groceries at the market\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "317"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13d-iUrNjQ15I2o2xhzkUVjZawkVIF4\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Aug 2025 10:03:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"userId\": \"688f994fe57046a8bd30dccc\",\n            \"type\": \"expense\",\n            \"amount\": 120.5,\n            \"category\": \"6891d679f7aa92427d7a2d93\",\n            \"date\": \"2025-08-01T00:00:00.000Z\",\n            \"description\": \"Groceries at the market\",\n            \"createdAt\": \"2025-08-05T10:01:58.192Z\",\n            \"updatedAt\": \"2025-08-05T10:01:58.192Z\",\n            \"id\": \"6891d696f7aa92427d7a2d96\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update transaction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzODgwNDYsImV4cCI6MTc1NDM5MTY0Nn0.RzlMKf1q5fMObk6hXlDleAo-55k9Ee9jA_aD803T4KQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"amount\": 200,\n  \"description\": \"Updated groceries\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/transactions/6891d696f7aa92427d7a2d96",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"transactions",
+						"6891d696f7aa92427d7a2d96"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 200,\n  \"description\": \"Updated groceries\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions/6891d696f7aa92427d7a2d96",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"6891d696f7aa92427d7a2d96"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "363"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16b-AvnDNT2zGsjiPgffuz8RECV5YYw\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Aug 2025 10:05:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"userId\": \"688f994fe57046a8bd30dccc\",\n        \"type\": \"expense\",\n        \"amount\": 200,\n        \"category\": {\n            \"name\": \"Other\",\n            \"type\": \"income\",\n            \"color\": \"#FFAA00\",\n            \"id\": \"6891d679f7aa92427d7a2d93\"\n        },\n        \"date\": \"2025-08-01T00:00:00.000Z\",\n        \"description\": \"Updated groceries\",\n        \"createdAt\": \"2025-08-05T10:01:58.192Z\",\n        \"updatedAt\": \"2025-08-05T10:05:11.654Z\",\n        \"id\": \"6891d696f7aa92427d7a2d96\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get transaction by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzODgwNDYsImV4cCI6MTc1NDM5MTY0Nn0.RzlMKf1q5fMObk6hXlDleAo-55k9Ee9jA_aD803T4KQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/transactions/6891d696f7aa92427d7a2d96",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"transactions",
+						"6891d696f7aa92427d7a2d96"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions/6891d696f7aa92427d7a2d96",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"6891d696f7aa92427d7a2d96"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "363"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16b-AvnDNT2zGsjiPgffuz8RECV5YYw\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Aug 2025 10:06:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"userId\": \"688f994fe57046a8bd30dccc\",\n        \"type\": \"expense\",\n        \"amount\": 200,\n        \"category\": {\n            \"name\": \"Other\",\n            \"type\": \"income\",\n            \"color\": \"#FFAA00\",\n            \"id\": \"6891d679f7aa92427d7a2d93\"\n        },\n        \"date\": \"2025-08-01T00:00:00.000Z\",\n        \"description\": \"Updated groceries\",\n        \"createdAt\": \"2025-08-05T10:01:58.192Z\",\n        \"updatedAt\": \"2025-08-05T10:05:11.654Z\",\n        \"id\": \"6891d696f7aa92427d7a2d96\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete transaction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWQiOiI2ODhmOTk0ZmU1NzA0NmE4YmQzMGRjY2MiLCJpYXQiOjE3NTQzODgwNDYsImV4cCI6MTc1NDM5MTY0Nn0.RzlMKf1q5fMObk6hXlDleAo-55k9Ee9jA_aD803T4KQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/transactions/6891d7d4f7aa92427d7a2da2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"transactions",
+						"6891d7d4f7aa92427d7a2da2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions/6891d7d4f7aa92427d7a2da2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"6891d7d4f7aa92427d7a2da2"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Aug 2025 10:07:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
