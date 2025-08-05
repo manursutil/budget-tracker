@@ -25,6 +25,7 @@ This is the backend for the Budget Tracker app, built with Node.js, Express, Typ
 - `src/tests/controllers.test.ts` – Unit tests for user creation and login controllers
 - `src/tests/simple-integration.test.ts` – Integration tests for complete authentication flow
 - `src/tests/categoryControllers.test.ts` – Integration and API tests for category endpoints
+- `src/tests/transactionControllers.test.ts` – Tests for transaction controller logic
 - `src/tests/setup.ts` – Test environment setup
 
 ### Running Tests
@@ -77,6 +78,18 @@ The tests cover:
 - ✅ DELETE /categories/:id: delete category with ownership check
 - ✅ Proper handling of unauthorized access or non-existent resources
 
+#### Transaction Controller
+
+- ✅ GET /transactions: fetch transactions by user and optional type filter
+- ✅ POST /transactions: create transaction with validation
+- ✅ GET /transactions/:id: fetch a single transaction
+- ✅ PATCH /transactions/:id: update existing transaction
+- ✅ DELETE /transactions/:id: remove a transaction
+- ✅ Input validation using Zod
+- ✅ Category existence checks
+- ✅ ObjectId validation
+- ✅ Response format and error handling
+
 #### Integration Tests
 
 - ✅ Complete registration to login flow
@@ -125,15 +138,11 @@ npm run dev
 
 #### Transaction Endpoints:
 
-- IN PROGRESS
-
-#### Budget Endpoints:
-
-- IN PROGRESS
-
-#### Reports Endpoints:
-
-- IN PROGRESS
+- GET /api/transactions
+- POST /api/transactions
+- GET /api/transactions/:id
+- DELETE /api/transactions/:id
+- PATCH /api/transactions/:id
 
 ## Authorization
 
@@ -153,8 +162,11 @@ backend/
 │   ├── routes/
 │   ├── types/
 │   ├── tests/
+│   ├── utils/
+│   ├── schemas/
 │   ├── config/
 │   ├── middleware/
+│   ├── constants.ts
 │   └── server.ts
 ├── .env
 ├── .gitignore

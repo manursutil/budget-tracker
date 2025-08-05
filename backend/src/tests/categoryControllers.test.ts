@@ -9,7 +9,7 @@ import {
   updateCategory,
   deleteCategory,
 } from '@/controllers/categoryController';
-import '@/tests/setup'; // Import your test setup
+import '@/tests/setup';
 
 // Mock response object
 const mockResponse = () => {
